@@ -17,14 +17,12 @@ public class LibroController {
     @Autowired
     private LibroService libroService;
     
-    @GetMapping("registro")       //localhost:8080/perro/registro
+    @GetMapping("/registro")       //localhost:8080/libro/registro
     public String formularioIngreso(){
         return ("formularioIngreso");
     }
-    
     @PostMapping("/registro")
-    public String guardarLibro(ModelMap modelo,@RequestParam Integer isbn,@RequestParam String titulo,@RequestParam String Autor,@RequestParam String Editorial,@RequestParam Integer anio) throws MyException{
-        
+    public String guardarLibro(ModelMap modelo,@RequestParam Long isbn,@RequestParam String titulo,@RequestParam String Autor,@RequestParam String Editorial,@RequestParam Integer anio) throws MyException{
         try{
             libroService.guardarLibro(isbn,titulo,Autor,Editorial,anio);
             modelo.put("exito", "Guardado de manera exitosa!");

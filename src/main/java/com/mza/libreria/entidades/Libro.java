@@ -6,7 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Libro {
@@ -16,7 +15,7 @@ public class Libro {
     private String id;
     
     @NotNull
-    private long isbn;
+    private Long isbn;
     
     @NotNull
     @Column(unique=true)
@@ -27,17 +26,19 @@ public class Libro {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
+    private String autor;
+    private String editorial;
     
-    @ManyToOne
-    private Autor autor;
-    @ManyToOne
-    private Editorial editorial;
-    
+//    @ManyToOne
+//    private Autor autor;
+//    @ManyToOne
+//    private Editorial editorial;
+//    
 
     public Libro() {
     }
 
-    public Libro(String id, long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -58,11 +59,11 @@ public class Libro {
         this.id = id;
     }
 
-    public long getIsbn() {
+    public Long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 
@@ -114,19 +115,19 @@ public class Libro {
         this.alta = alta;
     }
 
-    public Autor getAutor() {
+    public String getAutor() {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    public void setAutor(String autor) {
         this.autor = autor;
     }
 
-    public Editorial getEditorial() {
+    public String getEditorial() {
         return editorial;
     }
 
-    public void setEditorial(Editorial editorial) {
+    public void setEditorial(String editorial) {
         this.editorial = editorial;
     }
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
@@ -32,28 +32,28 @@
             </div>
         </div>
         <div class="container">
-            <form class="formulario-ingreso" >
+            <form th:action="@{/libro/registro}" method="POST" class="formulario-ingreso" >
                 <h3>Ingrese un libro a continuación.</h3>
                 <br>
                 <div class="form-group">
-                    <label for="inputTitulo">Titulo</label>
-                    <input type="text" class="form-control" id="inputTitulo" aria-describedby="titulohelp">
+                    <label>Titulo</label>
+                    <input type="text" class="form-control" name="titulo" placeholder="Ingrese el titulo del libro.">
                 </div>
                 <div class="form-group">
-                    <label for="inputAutor">Autor</label>
-                    <input type="text" class="form-control" id="inputAutor">
+                    <label>Autor</label>
+                    <input type="text" class="form-control" name="autor" placeholder="Ingrese el Autor del libro.">
                 </div>
                 <div class="form-group">
-                    <label for="inputISBN">ISBN</label>
-                    <input type="number" class="form-control" id="inputISBN">
+                    <label>ISBN</label>
+                    <input type="long" class="form-control" name="isbn" placeholder="Número ISBN">
                 </div>
                 <div class="form-group">
-                    <label for="inputEditorial">Editorial</label>
-                    <input type="text" class="form-control" id="inputEditorial">
+                    <label>Editorial</label>
+                    <input type="text" class="form-control" name="editorial" placeholder="Ingrese la Editorial del libro.">
                 </div>
                 <div class="form-group">
-                    <label for="inputAño">Año de publicación</label>
-                    <input type="number" class="form-control" id="inputAño">
+                    <label for="inputanio">Año de publicación</label>
+                    <input type="number" class="form-control" name="anio">
                 </div>
                 <br>
                 <button type="submit" class="btn btn-primary">Guardar</button>

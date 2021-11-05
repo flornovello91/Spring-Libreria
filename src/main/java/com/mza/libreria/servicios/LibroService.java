@@ -15,24 +15,22 @@ public class LibroService {
     private AutorService autorService;
     private EditorialService editorialService;
     
-    public void guardarLibro (long isbn,String titulo,String Autor,String Editorial,Integer anio) throws MyException{
-        
-        try{
-            validarDatos(isbn,titulo,Autor,Editorial);
-            Libro libro = new Libro();
-            libro.setIsbn(isbn);
-            libro.setTitulo(titulo);
-            libro.setAutor(autorService.guardarAutor(Autor));
-            libro.setEditorial(editorialService.guardarEditorial(Editorial));
-            libro.setEjemplares(1000);
-            int ejemplaresPrestados = (int) (Math.random() * 151);
-            libro.setEjemplaresPrestados(ejemplaresPrestados);
-            libro.setEjemplaresRestantes(1000-ejemplaresPrestados);
-            libro.setAnio(anio);
-            repositorioLibro.save(libro);
-        }catch (MyException e ){
-            System.out.println("HUBO UN ERROR.");
-        }   
+    public void guardarLibro (Long isbn,String titulo,String Autor,String Editorial,Integer anio) throws MyException{
+   
+        validarDatos(isbn, titulo, Autor, Editorial);
+        Libro libro = new Libro();
+        libro.setIsbn(isbn);
+        libro.setTitulo(titulo);
+        libro.setAutor(Autor);
+        libro.setEditorial(Editorial);
+//        libro.setAutor(autorService.guardarAutor(Autor));
+//        libro.setEditorial(editorialService.guardarEditorial(Editorial));
+        libro.setEjemplares(1000);
+        int ejemplaresPrestados = (int) (Math.random() * 151);
+        libro.setEjemplaresPrestados(ejemplaresPrestados);
+        libro.setEjemplaresRestantes(1000 - ejemplaresPrestados);
+        libro.setAnio(anio);
+        repositorioLibro.save(libro);
     }
     
     @Transactional
@@ -56,12 +54,3 @@ public class LibroService {
         }
     }
 }
-/*
-public Perro alta(String id) {
-
-		Perro entidad = perroRepository.findById(id).get();
-
-		entidad.setActivo(true);
-		return perroRepository.save(entidad);
-	}
-*/
