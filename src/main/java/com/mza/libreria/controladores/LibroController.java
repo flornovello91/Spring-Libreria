@@ -4,6 +4,7 @@ import com.mza.libreria.MyException.MyException;
 import com.mza.libreria.servicios.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +23,16 @@ public class LibroController {
     }
     
     @PostMapping("/registro")
-    public String guardarLibro(@RequestParam Integer isbn,@RequestParam String titulo,@RequestParam String Autor,@RequestParam String Editorial,@RequestParam Integer anio) throws MyException{
+    public String guardarLibro(ModelMap modelo,@RequestParam Integer isbn,@RequestParam String titulo,@RequestParam String Autor,@RequestParam String Editorial,@RequestParam Integer anio) throws MyException{
         
         try{
             libroService.guardarLibro(isbn,titulo,Autor,Editorial,anio);
+            modelo.put("exito", "Guardado de manera exitosa!");
             return ("formularioIngreso");
         }catch (MyException e){
-            //poner el model aca
+            modelo.put("error", "Error en la carga del libro.");
             return ("formularioIngreso");
         }
     }
 }
+

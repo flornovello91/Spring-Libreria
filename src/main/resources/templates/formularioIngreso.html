@@ -1,11 +1,64 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>PROBANDO LA PAGINA DE INGRESO DE LIBROS</div>
-    </body>
-</html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="formularioIngreso.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <title>Ingrese un libro</title>
+</head>
+<body>
+    <style>
+        .formulario-ingreso{
+            margin: 0 auto;
+            width:80%;
+            margin-top: 50px;
+        }
+    </style>
+    <div class="container m-5">
+        <div th:if="${exito}!=null" class="card text-white bg-success mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">Exito</h5>
+                <p class="card-text" th:text="${exito}"></p>
+            </div>
+        </div>
+        <div th:if="${error}!=null" class="card text-white bg-danger mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
+        </div>
+        <div class="container">
+            <form class="formulario-ingreso" >
+                <h3>Ingrese un libro a continuación.</h3>
+                <br>
+                <div class="form-group">
+                    <label for="inputTitulo">Titulo</label>
+                    <input type="text" class="form-control" id="inputTitulo" aria-describedby="titulohelp">
+                </div>
+                <div class="form-group">
+                    <label for="inputAutor">Autor</label>
+                    <input type="text" class="form-control" id="inputAutor">
+                </div>
+                <div class="form-group">
+                    <label for="inputISBN">ISBN</label>
+                    <input type="number" class="form-control" id="inputISBN">
+                </div>
+                <div class="form-group">
+                    <label for="inputEditorial">Editorial</label>
+                    <input type="text" class="form-control" id="inputEditorial">
+                </div>
+                <div class="form-group">
+                    <label for="inputAño">Año de publicación</label>
+                    <input type="number" class="form-control" id="inputAño">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html> 
