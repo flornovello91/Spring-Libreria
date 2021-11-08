@@ -14,7 +14,6 @@ public class EditorialService {
         Editorial editorial = new Editorial ();
         editorial.setNombre(Editorial);
         editorial.setAlta(Boolean.TRUE);
-        repositorioEditorial.save(editorial);
-        return editorial;
+        return repositorioEditorial.save(editorial);
     }
 }

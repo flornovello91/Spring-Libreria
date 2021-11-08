@@ -3,7 +3,6 @@ package com.mza.libreria.servicios;
 import com.mza.libreria.MyException.MyException;
 import com.mza.libreria.entidades.Libro;
 import com.mza.libreria.repositorios.RepositorioLibro;
-import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,32 +12,33 @@ public class LibroService {
     @Autowired
     private RepositorioLibro repositorioLibro;
     
+    @Autowired
     private AutorService autorService;
+    
+    @Autowired
     private EditorialService editorialService;
     
-    public void guardarLibro (Long isbn,String titulo,String Autor,String Editorial,Integer anio) throws MyException{
+    public void guardarLibro (Long isbn,String titulo,String autor,String editorial,Integer anio) throws MyException{
         try {
             Libro libro = new Libro();
-
-            validarDatos(isbn, titulo, Autor, Editorial);
+            
+            validarDatos(isbn, titulo, autor, editorial,anio);
 
             libro.setIsbn(isbn);
             libro.setTitulo(titulo);
-            libro.setAutor(Autor);
-            libro.setEditorial(Editorial);
+            libro.setAnio(anio);
+            libro.setAlta(Boolean.TRUE);
             libro.setEjemplares(1000);
             int ejemplaresPrestados = (int) (Math.random() * 151);
             libro.setEjemplaresPrestados(ejemplaresPrestados);
             libro.setEjemplaresRestantes(1000 - ejemplaresPrestados);
-            libro.setAnio(anio);
+            libro.setAutor(autorService.guardarAutor(autor));
+            libro.setEditorial(editorialService.guardarEditorial(editorial));
+            
             repositorioLibro.save(libro);
-            //libro.setAutor(autorService.guardarAutor(Autor));
-            //libro.setEditorial(editorialService.guardarEditorial(Editorial));
         }catch (MyException e){
             System.out.println("Algo salió mal.");
         }
-        
-        
     }
     
     @Transactional
@@ -50,19 +50,29 @@ public class LibroService {
         }
         return repositorioLibro.save(libro);
     }
-    public void validarDatos (long isbn,String titulo,String Autor,String Editorial) throws MyException{
-        Optional <Libro> opcional = repositorioLibro.findByTitulo(titulo);
-        if (opcional.isPresent()){
-           throw new MyException ("Este titulo ya se encuentra registrado."); 
-        }
+    public void validarDatos (Long isbn,String titulo,String autor,String editorial,Integer anio) throws MyException{
+        
         if (titulo==null||titulo.isEmpty()){
             throw new MyException ("Debe indicar el titulo del libro.");
         }
-        if (Autor==null||Autor.isEmpty()){
+        if (autor==null||autor.isEmpty()){
             throw new MyException ("Debe indicar el autor del libro.");
         }
-        if (Editorial==null||Editorial.isEmpty()){
+        if (editorial==null||editorial.isEmpty()){
             throw new MyException ("Debe indicar la editorial del libro.");
         }
+        if (isbn <= 0 || isbn==null){
+            throw new MyException("Debe indicar el isbn correctamente.");
+        }
+        if (anio<=999){
+            throw new MyException("Debe indicar un año de publicación correcto.");
+        }
+        
+        //REVISAR ESTA QUERY PORQUE NO ME TRAE LAS COSAS
+        
+//        Optional <Libro> opcional = repositorioLibro.findByTitulo(titulo);
+//        if (opcional.isPresent()){
+//           throw new MyException ("Este titulo ya se encuentra registrado."); 
+//        }
     }
 }

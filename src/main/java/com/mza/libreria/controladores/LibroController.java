@@ -21,6 +21,7 @@ public class LibroController {
     public String formularioIngreso(){
         return ("formularioIngreso");
     }
+    
     @PostMapping("/registro")
     public String guardarLibro(ModelMap modelo,@RequestParam Long isbn,@RequestParam String titulo,@RequestParam String autor,@RequestParam String editorial,@RequestParam Integer anio)throws MyException{
         try{
@@ -29,9 +30,8 @@ public class LibroController {
             return ("formularioIngreso");
         }catch (MyException e){
             modelo.put("error", "Error en la carga del libro.");
-            
+            return ("formularioIngreso");
         }
-        return ("formularioIngreso");
     }
 }
 

@@ -14,7 +14,6 @@ public class AutorService {
         Autor autor = new Autor ();
         autor.setNombre(Autor);
         autor.setAlta(Boolean.TRUE);
-        repositorioAutor.save(autor);
-        return autor ;        
+        return repositorioAutor.save(autor);     
     }
 }

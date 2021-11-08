@@ -5,6 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -27,19 +28,17 @@ public class Libro {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
-    private String autor;
-    private String editorial;
     
-//    @ManyToOne
-//    private Autor autor;
-//    @ManyToOne
-//    private Editorial editorial;
-//    
+    @ManyToOne
+    private Autor autor;
+    
+    @ManyToOne
+    private Editorial editorial;
 
     public Libro() {
     }
 
-    public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, String autor, String editorial) {
+    public Libro(String id, Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -116,21 +115,19 @@ public class Libro {
         this.alta = alta;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public Editorial getEditorial() {
+        return editorial;
+    }
+ 
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
-    public String getEditorial() {
-        return editorial;
-    }
-
-    public void setEditorial(String editorial) {
+    public void setEditorial(Editorial editorial) {
         this.editorial = editorial;
     }
-    
-    
 }
