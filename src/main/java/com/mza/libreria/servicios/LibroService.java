@@ -41,24 +41,15 @@ public class LibroService {
         }
     }
     
-    @Transactional
-    public Libro altaLibro(String tituloLibro){
-        Libro libro = repositorioLibro.findByTitulo(tituloLibro).
-                orElseThrow(()-> new IllegalStateException("El libro con el titulo : "+tituloLibro+" no existe."));
-        if (libro != null){
-            libro.setAlta(Boolean.TRUE);
-        }
-        return repositorioLibro.save(libro);
-    }
     public void validarDatos (Long isbn,String titulo,String autor,String editorial,Integer anio) throws MyException{
         
-        if (titulo==null||titulo.isEmpty()){
+        if (titulo==null||titulo.isEmpty() || titulo.contains("  ")){
             throw new MyException ("Debe indicar el titulo del libro.");
         }
-        if (autor==null||autor.isEmpty()){
+        if (autor==null||autor.isEmpty() || titulo.contains("  ")){
             throw new MyException ("Debe indicar el autor del libro.");
         }
-        if (editorial==null||editorial.isEmpty()){
+        if (editorial==null||editorial.isEmpty() || titulo.contains("  ")){
             throw new MyException ("Debe indicar la editorial del libro.");
         }
         if (isbn <= 0 || isbn==null){
@@ -75,4 +66,34 @@ public class LibroService {
 //           throw new MyException ("Este titulo ya se encuentra registrado."); 
 //        }
     }
+    @Transactional
+    public Libro altaLibro(String tituloLibro){
+        Libro libro = repositorioLibro.findByTitulo(tituloLibro).
+                orElseThrow(()-> new IllegalStateException("El libro con el titulo : "+tituloLibro+" no existe."));
+        if (libro != null){
+            libro.setAlta(Boolean.TRUE);
+        }
+        return repositorioLibro.save(libro);
+    }
 }
+/*
+public void validar(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, String autor, String editorial) throws Exception {
+
+        if (titulo == null || titulo.isEmpty() || titulo.contains("  ")) {
+            throw new Exception();
+        }
+
+        if (autor == null || autor.isEmpty() || autor.contains("  ")) {
+            throw new Exception();
+        }
+
+        if (editorial == null || editorial.isEmpty() || editorial.contains("  ")) {
+            throw new Exception();
+        }
+
+        if (isbn == null || anio == null || ejemplares == null || ejemplaresPrestados == null || ejemplaresRestantes == null) {
+            throw new Exception();
+        }
+    }
+
+*/

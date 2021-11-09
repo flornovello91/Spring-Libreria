@@ -23,7 +23,7 @@ public class LibroController {
     }
     
     @PostMapping("/registro")
-    public String guardarLibro(ModelMap modelo,@RequestParam Long isbn,@RequestParam String titulo,@RequestParam String autor,@RequestParam String editorial,@RequestParam Integer anio)throws MyException{
+    public String guardarLibro(ModelMap modelo,@RequestParam (required = false) Long isbn,@RequestParam String titulo,@RequestParam String autor,@RequestParam String editorial,@RequestParam (required = false) Integer anio)throws MyException{
         try{
             libroService.guardarLibro(isbn,titulo,autor,editorial,anio);
             modelo.put("exito", "Guardado de manera exitosa!");
